@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.artlite.bslibrary.ui.fonted.BSEditText
+        android:id="@+id/edit_login"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:hint="@string/text_email"
+        android:inputType="textEmailAddress" />
 
-</android.support.constraint.ConstraintLayout>
+    <com.artlite.bslibrary.ui.fonted.BSEditText
+        android:id="@+id/edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/text_password"
+        android:inputType="textPassword" />
+
+    <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_login" />
+
+    <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/button_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_register" />
+
+    <com.artlite.bslibrary.ui.fonted.BSButton
+        android:id="@+id/button_forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_forgot_password" />
+
+
+</LinearLayout>
