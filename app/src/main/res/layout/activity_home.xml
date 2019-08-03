@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <com.artlite.bslibrary.ui.custom.BSViewPagerNonScroll
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?actionBarSize" />
+
+    <com.artlite.publicatiosystem.ui.views.BottomBarView
+        android:id="@+id/view_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+</FrameLayout>
