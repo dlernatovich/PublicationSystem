@@ -80,5 +80,19 @@ public class HomeActivity extends BSActivity implements BottomBarView.BottomBarV
     @Override
     public void bottomBarClicked(@NonNull BottomBarView view, int index) {
         this.viewPager.setCurrentItem(index);
+        switch (index) {
+            case 0:
+                this.setTitle(R.string.text_home);
+                break;
+            case 1:
+                this.setTitle(R.string.draft);
+                break;
+            case 2:
+                this.setTitle(R.string.text_favourites);
+                break;
+            case 3:
+                this.setTitle(R.string.text_settings);
+                break;
+        }
     }
 }
