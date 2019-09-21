@@ -1,20 +1,23 @@
 package com.artlite.publicatiosystem.ui.activities;
 
+import android.app.usage.UsageEvents;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
-import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
 import com.artlite.publicatiosystem.R;
+import com.artlite.publicatiosystem.mvp.login.DefaultLoginPresenter;
+import com.artlite.publicatiosystem.mvp.login.LoginContract;
+import com.artlite.publicatiosystem.repositories.user.UserRepository;
 
 /**
  * Activity which provide the login for us
  */
-public class MainActivity extends BSActivity {
+public class MainActivity extends BSActivity implements LoginContract.View {
 
     /**
      * Instance of {@link BSEditText}
@@ -27,6 +30,11 @@ public class MainActivity extends BSActivity {
      */
     @FindViewBy(id = R.id.edit_password)
     private BSEditText passwordEditText;
+
+    /**
+     * Instance of the {@link DefaultLoginPresenter}
+     */
+    private DefaultLoginPresenter presenter;
 
     /**
      * Method which provide the getting of the layout ID for the current Activity
@@ -46,6 +54,11 @@ public class MainActivity extends BSActivity {
     @Override
     protected void onCreateActivity(@Nullable Bundle bundle) {
         this.setTitle(R.string.text_login);
+        if (UserRepository.getInstance().isAuthentificated()) {
+            this.startHomeActivity();
+            return;
+        }
+        this.presenter = new DefaultLoginPresenter(this);
         this.setOnClickListeners(R.id.button_register,
                 R.id.button_forgot_password,
                 R.id.button_login);
@@ -82,9 +95,8 @@ public class MainActivity extends BSActivity {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.button_login) {
-            if (this.validateFields()) {
-                this.startHomeActivity();
-            }
+            this.presenter.loginPresenterAuth(this.loginEditText.getStringValue(),
+                    this.passwordEditText.getStringValue());
         } else if (id == R.id.button_register) {
             // TODO: 20.07.2019
         } else if (id == R.id.button_forgot_password) {
@@ -93,23 +105,28 @@ public class MainActivity extends BSActivity {
     }
 
     /**
-     * Method which provide us to validate fields
+     * Method which provide the logic when the presenter return result
      *
-     * @return result
+     * @param event   instance of the {@link UsageEvents.Event}
+     * @param message instance of the {@link String}
      */
-    protected boolean validateFields() {
-        if (this.loginEditText.getText().toString().isEmpty()) {
-            this.loginEditText.setError(getString(R.string.text_required_field));
-            return false;
+    @Override
+    public void loginViewOnResult(LoginContract.Events event, @Nullable String message) {
+        switch (event) {
+            case SUCCESS:
+                this.startHomeActivity();
+                break;
+            case ERROR:
+                break;
+            case NULL_EMAIL:
+                this.loginEditText.setError(getString(R.string.text_required_field));
+                break;
+            case WRONG_EMAIL:
+                this.loginEditText.setError(getString(R.string.text_invalid_email));
+                break;
+            case NULL_PASSWORD:
+                this.passwordEditText.setError(getString(R.string.text_required_field));
+                break;
         }
-        if (!BSValidationHelper.validateEmail(this.loginEditText.getText().toString())) {
-            this.loginEditText.setError(getString(R.string.text_invalid_email));
-            return false;
-        }
-        if (this.passwordEditText.getText().toString().isEmpty()) {
-            this.passwordEditText.setError(getString(R.string.text_required_field));
-            return false;
-        }
-        return true;
     }
 }
