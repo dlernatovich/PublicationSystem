@@ -164,7 +164,7 @@ public class BottomBarView extends BSView {
                 this.label4
         };
         this.setOnClickListeners(R.id.item_1, R.id.item_2, R.id.item_3, R.id.item_4);
-
+        this.select(0);
     }
 
     /**
@@ -212,6 +212,7 @@ public class BottomBarView extends BSView {
         }
         for (BSTextView label : this.labels) {
             label.setTextColor(getResources().getColor(R.color.colorBarDefault));
+            label.setVisibility(GONE);
         }
     }
 
@@ -225,5 +226,6 @@ public class BottomBarView extends BSView {
         this.images[index].setSupportImageTintList(ColorStateList
                 .valueOf(getResources().getColor(R.color.colorAccent)));
         this.labels[index].setTextColor(getResources().getColor(R.color.colorAccent));
+        this.labels[index].setVisibility(VISIBLE);
     }
 }
