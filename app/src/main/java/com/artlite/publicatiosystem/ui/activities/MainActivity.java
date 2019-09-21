@@ -1,8 +1,9 @@
 package com.artlite.publicatiosystem.ui.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;

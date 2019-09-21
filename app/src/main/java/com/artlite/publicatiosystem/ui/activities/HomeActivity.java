@@ -1,8 +1,9 @@
 package com.artlite.publicatiosystem.ui.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;
