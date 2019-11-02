@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="@dimen/dimen_0">
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="#212122"
+        android:layout_height="?actionBarSize">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/button_add_text"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_25"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:src="@drawable/ic_new_item_bottom_text"
+            app:tint="@color/colorAccent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/button_add_image"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_25"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:src="@drawable/ic_new_item_bottom_image"
+            app:tint="@color/colorAccent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/button_add_audio"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="@dimen/dimen_25"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:src="@drawable/ic_new_item_bottom_audio"
+            app:tint="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0"
+            android:layout_weight="2"
+            android:background="@drawable/bg_bottom_control_elements"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:layout_marginBottom="@dimen/dimen_8"
+            android:layout_marginRight="@dimen/dimen_8"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/button_add_save"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_25"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:src="@drawable/ic_new_item_bottom_save"
+                app:tint="#66BB6A" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/button_cancel"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="@dimen/dimen_25"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:src="@drawable/ic_new_item_bottom_cancel"
+                app:tint="#ef5350" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

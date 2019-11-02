@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.artlite.bslibrary.ui.fragment.BSFragment;
 import com.artlite.publicatiosystem.R;
+import com.artlite.publicatiosystem.ui.activities.NewItemActivity;
 
 public class HomeFragment extends BSFragment {
 
@@ -24,7 +25,7 @@ public class HomeFragment extends BSFragment {
      */
     @Override
     protected void onCreateFragment(View containerView) {
-
+        this.setOnClickListeners(R.id.button_add);
     }
 
     /**
@@ -37,4 +38,15 @@ public class HomeFragment extends BSFragment {
 
     }
 
+    /**
+     * Method which provide the action for the OnClickListener event
+     *
+     * @param v current view
+     */
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.button_add) {
+            this.startActivity(NewItemActivity.class);
+        }
+    }
 }
