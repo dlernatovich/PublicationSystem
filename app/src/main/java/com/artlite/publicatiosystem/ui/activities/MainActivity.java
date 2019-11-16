@@ -4,8 +4,11 @@ import android.app.usage.UsageEvents;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.artlite.apiskd.viewmodels.UserViewModel;
 import com.artlite.bslibrary.annotations.FindViewBy;
 import com.artlite.bslibrary.ui.activity.BSActivity;
 import com.artlite.bslibrary.ui.fonted.BSEditText;
@@ -18,6 +21,11 @@ import com.artlite.publicatiosystem.repositories.user.UserRepository;
  * Activity which provide the login for us
  */
 public class MainActivity extends BSActivity implements LoginContract.View {
+
+    /**
+     * Users view model
+     */
+    private UserViewModel userViewModel;
 
     /**
      * Instance of {@link BSEditText}
@@ -54,15 +62,16 @@ public class MainActivity extends BSActivity implements LoginContract.View {
     @Override
     protected void onCreateActivity(@Nullable Bundle bundle) {
         this.setTitle(R.string.text_login);
-        if (UserRepository.getInstance().isAuthentificated()) {
-            this.startHomeActivity();
-            return;
-        }
+//        if (UserRepository.getInstance().isAuthentificated()) {
+//            this.startHomeActivity();
+//            return;
+//        }
+        this.userViewModel = ViewModelProviders.of(this)
+                .get(UserViewModel.class);
         this.presenter = new DefaultLoginPresenter(this);
         this.setOnClickListeners(R.id.button_register,
                 R.id.button_forgot_password,
                 R.id.button_login);
-
     }
 
     /**
@@ -129,4 +138,15 @@ public class MainActivity extends BSActivity implements LoginContract.View {
                 break;
         }
     }
+
+    /**
+     * Method which provide the getting of the view model
+     *
+     * @return instance of the {@link UserViewModel}
+     */
+    @NonNull
+    public UserViewModel getViewModel() {
+        return this.userViewModel;
+    }
+
 }

@@ -66,7 +66,7 @@ public class UserRepository {
     public boolean saveAuthentification(@Nullable UserModel model) {
         if (model == null) return false;
         if (!model.validate()) return false;
-        BSCryptSharedPreferenceManager.save(model.getId(), Constants.KEY_AUTH.value);
+        BSCryptSharedPreferenceManager.save(model.getIdentifier(), Constants.KEY_AUTH.value);
         BSCryptSharedPreferenceManager.save(model.getEmail(), Constants.KEY_EMAIL.value);
         BSCryptSharedPreferenceManager.save(model.getPassword(), Constants.KEY_PASSWORD.value);
         return true;

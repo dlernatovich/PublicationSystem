@@ -1,7 +1,13 @@
 package com.artlite.publicatiosystem.mvp.login;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.artlite.apiskd.models.UserModel;
+import com.artlite.apiskd.viewmodels.UserViewModel;
+
+import java.util.List;
 
 /**
  * Login contract
@@ -39,6 +45,21 @@ public final class LoginContract {
         boolean loginPresenterValidate(@Nullable String email,
                                        @Nullable String password);
 
+        /**
+         * Method which provide the getting of the available users
+         *
+         * @return instance of the {@link List}
+         */
+        @NonNull
+        List<UserModel> getAvailableUsers(@Nullable String email);
+
+        /**
+         * Method which provide the save of the {@link UserModel} to database
+         *
+         * @param model instance of the {@link UserModel}
+         */
+        void save(@NonNull UserModel model);
+
     }
 
     /**
@@ -55,6 +76,14 @@ public final class LoginContract {
         @MainThread
         void loginViewOnResult(Events event,
                                @Nullable String message);
+
+        /**
+         * Method which provide the getting of the view model
+         *
+         * @return instance of the {@link UserViewModel}
+         */
+        @NonNull
+        UserViewModel getViewModel();
 
     }
 

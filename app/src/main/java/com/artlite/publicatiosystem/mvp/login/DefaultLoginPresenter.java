@@ -1,10 +1,14 @@
 package com.artlite.publicatiosystem.mvp.login;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.artlite.apiskd.models.UserModel;
 import com.artlite.bslibrary.helpers.validation.BSValidationHelper;
 import com.artlite.publicatiosystem.repositories.user.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Default login contract presenter
@@ -35,11 +39,21 @@ public class DefaultLoginPresenter implements LoginContract.Presenter {
     public void loginPresenterAuth(@Nullable String email,
                                    @Nullable String password) {
         if (this.loginPresenterValidate(email, password)) {
-            final UserModel model = new UserModel.Builder()
-                    .setEmail(email)
-                    .setPassword(password)
-                    .build();
-            if (UserRepository.getInstance().saveAuthentification(model)) {
+            List<UserModel> available = this.getAvailableUsers(email);
+            UserModel model = null;
+            if (available.size() > 0) {
+                model = available.get(0);
+            } else {
+                model = new UserModel.Builder()
+                        .setEmail(email)
+                        .setPassword(password)
+                        .build();
+                this.save(model);
+            }
+            if (!model.getPassword().equals(password)) {
+                this.view.loginViewOnResult(LoginContract.Events.ERROR,
+                        "Password is invalid");
+            } else if (UserRepository.getInstance().saveAuthentification(model)) {
                 this.view.loginViewOnResult(LoginContract.Events.SUCCESS, null);
             } else {
                 this.view.loginViewOnResult(LoginContract.Events.ERROR,
@@ -72,4 +86,30 @@ public class DefaultLoginPresenter implements LoginContract.Presenter {
         }
         return true;
     }
+
+    /**
+     * Method which provide the getting of the available users
+     *
+     * @param email
+     * @return instance of the {@link List}
+     */
+    @NonNull
+    @Override
+    public List<UserModel> getAvailableUsers(@Nullable String email) {
+        if (email == null) {
+            return new ArrayList<>();
+        }
+        return this.view.getViewModel().getUserByEmail(email);
+    }
+
+    /**
+     * Method which provide the save of the {@link UserModel} to database
+     *
+     * @param model instance of the {@link UserModel}
+     */
+    @Override
+    public void save(@NonNull UserModel model) {
+        this.view.getViewModel().add(model);
+    }
+
 }
